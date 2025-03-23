@@ -1,4 +1,3 @@
-
 document.getElementById('exchangeForm').addEventListener('submit', function(e) {
   e.preventDefault();
 
@@ -14,8 +13,9 @@ document.getElementById('exchangeForm').addEventListener('submit', function(e) {
   const zip = form.zip.value;
   const province = form.province.value;
   const country = form.country.value;
+  const birthdate = form.birthdate.value;
 
-  emailjs.init('E12iyom7-49KmyGud'); // User ID / Public Key
+  emailjs.init('E12iyom7-49KmyGud');
   const serviceID = 'service_2mxuxfg';
   const templateID = 'template_4wt295m';
 
@@ -30,17 +30,19 @@ document.getElementById('exchangeForm').addEventListener('submit', function(e) {
     city,
     zip,
     province,
-    country
+    country,
+    birthdate
   };
 
   emailjs.send(serviceID, templateID, templateParams)
     .then(() => {
       console.log("Email sent successfully");
 
-      const pdfText = `ДОГОВОР\n\nФИО: ${name}\nПаспорт / NIE: ${passport}\nEmail: ${email}\nТелефон: ${phone}\nIBAN: ${iban}\nСумма: ${amount} USDT\nАдрес: ${street}, ${city}, ${zip}, ${province}, ${country}`;
-      const blob = new Blob([pdfText], { type: 'application/pdf' });
+      const docText = `ДОГОВОР\n\nФИО: ${name}\nПаспорт / NIE: ${passport}\nEmail: ${email}\nТелефон: ${phone}\nДата рождения: ${birthdate}\nIBAN: ${iban}\nСумма: ${amount} USDT\nАдрес: ${street}, ${city}, ${zip}, ${province}, ${country}`;
+      const blob = new Blob([docText], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
       const url = URL.createObjectURL(blob);
       document.getElementById('downloadLink').href = url;
+      document.getElementById('downloadLink').download = 'contract.docx';
 
       const waText = encodeURIComponent("Здравствуйте! Я отправил форму и готов продолжить перевод.");
       document.getElementById('whatsappLink').href = `https://wa.me/34653500599?text=${waText}`;
