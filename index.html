@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Заявка на обмен USDT → EUR</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Заявка на обмен USDT → EUR</h1>
+    <form id="exchangeForm">
+      <label>ФИО:</label><input type="text" name="name" required />
+      <label>Паспорт / NIE:</label><input type="text" name="passport" required />
+      <label>Email:</label><input type="email" name="email" required />
+      <label>IBAN:</label><input type="text" name="iban" required />
+      <label>Сумма (в USDT):</label><input type="number" name="amount" required />
+      <label><input type="checkbox" required /> Я согласен с условиями и AML/KYC</label>
+      <button type="submit">Отправить</button>
+    </form>
+    <div id="result" style="display:none;">
+      <p>Договор сгенерирован:</p>
+      <a id="downloadLink" href="#" download="contract.pdf">Скачать договор (PDF)</a><br><br>
+      <a id="whatsappLink" href="#" target="_blank">Перейти в WhatsApp</a>
+    </div>
+  </div>
+  <script src="form.js"></script>
+</body>
+</html>
