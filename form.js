@@ -36,15 +36,15 @@ document.getElementById('exchangeForm').addEventListener('submit', async functio
   const serviceID = 'service_2mxuxfg';
   const templateID = 'template_4wt295m';
 
-  // Отправка email через EmailJS
+  // Отправка email
   emailjs.send(serviceID, templateID, templateParams)
-    .then(() => console.log("Email отправлен успешно"))
+    .then(() => console.log("Email отправлен"))
     .catch((error) => {
       console.error("EmailJS ошибка:", error);
       alert("Ошибка при отправке email. Попробуйте ещё раз.");
     });
 
-  // Запрос к backend-генератору Word-документа
+  // Генерация Word-договора на сервере
   try {
     const response = await fetch("https://usdt-docs.railway.app/generate", {
       method: "POST",
@@ -54,20 +54,17 @@ document.getElementById('exchangeForm').addEventListener('submit', async functio
       body: JSON.stringify(templateParams)
     });
 
-    if (!response.ok) {
-      throw new Error("Ошибка при генерации договора");
-    }
+    if (!response.ok) throw new Error("Ошибка генерации договора");
 
     const blob = await response.blob();
     const url = URL.createObjectURL(blob);
-    const downloadLink = document.getElementById('downloadLink');
+    const downloadLink = document.getElementById("downloadLink");
     downloadLink.href = url;
     downloadLink.download = "contract.docx";
 
     const waText = encodeURIComponent("Здравствуйте! Я отправил форму и готов продолжить перевод.");
-    document.getElementById('whatsappLink').href = `https://wa.me/34653500599?text=${waText}`;
-    document.getElementById('result').style.display = 'block';
-
+    document.getElementById("whatsappLink").href = `https://wa.me/34653500599?text=${waText}`;
+    document.getElementById("result").style.display = "block";
   } catch (error) {
     console.error("Ошибка генерации документа:", error);
     alert("Не удалось сгенерировать договор. Попробуйте позже.");
