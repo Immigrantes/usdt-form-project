@@ -8,14 +8,14 @@ document.getElementById('exchangeForm').addEventListener('submit', function(e) {
   const iban = form.iban.value;
   const amount = form.amount.value;
   const phone = form.phone.value;
+  const birthdate = form.birthdate.value;
   const street = form.street.value;
   const city = form.city.value;
   const zip = form.zip.value;
   const province = form.province.value;
   const country = form.country.value;
-  const birthdate = form.birthdate.value;
 
-  emailjs.init('E12iyom7-49KmyGud');
+  emailjs.init('E12iyom7-49KmyGud'); // Public Key
   const serviceID = 'service_2mxuxfg';
   const templateID = 'template_4wt295m';
 
@@ -26,20 +26,22 @@ document.getElementById('exchangeForm').addEventListener('submit', function(e) {
     iban,
     amount,
     phone,
+    birthdate,
     street,
     city,
     zip,
     province,
-    country,
-    birthdate
+    country
   };
 
   emailjs.send(serviceID, templateID, templateParams)
     .then(() => {
       console.log("Email sent successfully");
 
-      const docText = `ДОГОВОР\n\nФИО: ${name}\nПаспорт / NIE: ${passport}\nEmail: ${email}\nТелефон: ${phone}\nДата рождения: ${birthdate}\nIBAN: ${iban}\nСумма: ${amount} USDT\nАдрес: ${street}, ${city}, ${zip}, ${province}, ${country}`;
-      const blob = new Blob([docText], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+      const docContent = `ДОГОВОР\\n\\nФИО: ${name}\\nПаспорт / NIE: ${passport}\\nEmail: ${email}\\nТелефон: ${phone}\\nДата рождения: ${birthdate}\\nIBAN: ${iban}\\nСумма: ${amount} USDT\\nАдрес: ${street}, ${city}, ${zip}, ${province}, ${country}`;
+      const blob = new Blob([docContent], {
+        type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+      });
       const url = URL.createObjectURL(blob);
       document.getElementById('downloadLink').href = url;
       document.getElementById('downloadLink').download = 'contract.docx';
