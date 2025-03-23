@@ -15,10 +15,9 @@ document.getElementById('exchangeForm').addEventListener('submit', function(e) {
   const province = form.province.value;
   const country = form.country.value;
 
-  // Инициализация EmailJS
-  emailjs.init('YOUR_USER_ID'); // замените на ваш EmailJS user ID
-  const serviceID = 'YOUR_SERVICE_ID';
-  const templateID = 'YOUR_TEMPLATE_ID';
+  emailjs.init('E12iyom7-49KmyGud'); // User ID / Public Key
+  const serviceID = 'service_2mxuxfg';
+  const templateID = 'template_4wt295m';
 
   const templateParams = {
     name,
@@ -38,7 +37,7 @@ document.getElementById('exchangeForm').addEventListener('submit', function(e) {
     .then(() => {
       console.log("Email sent successfully");
 
-      const pdfText = `ДОГОВОР\n\nФИО: ${name}\nПаспорт / NIE: ${passport}\nEmail: ${email}\nIBAN: ${iban}\nСумма: ${amount} USDT\nТелефон: ${phone}\nАдрес: ${street}, ${city}, ${zip}, ${province}, ${country}`;
+      const pdfText = `ДОГОВОР\n\nФИО: ${name}\nПаспорт / NIE: ${passport}\nEmail: ${email}\nТелефон: ${phone}\nIBAN: ${iban}\nСумма: ${amount} USDT\nАдрес: ${street}, ${city}, ${zip}, ${province}, ${country}`;
       const blob = new Blob([pdfText], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       document.getElementById('downloadLink').href = url;
