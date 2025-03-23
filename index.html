@@ -10,7 +10,7 @@
   <div class="container">
     <h1>Заявка на обмен USDT → EUR</h1>
 
-    <form id="exchangeForm" enctype="multipart/form-data">
+    <form id="exchangeForm">
       <label>ФИО:</label>
       <input type="text" name="name" required />
 
@@ -23,13 +23,15 @@
       <label>Телефон (с кодом страны):</label>
       <input type="text" name="phone" required />
 
+      <label>Дата рождения:</label>
+      <input type="date" name="birthdate" required />
+
       <label>IBAN:</label>
       <input type="text" name="iban" required />
 
       <label>Сумма (в USDT):</label>
       <input type="number" name="amount" required />
 
-      <!-- Адрес -->
       <label>Улица:</label>
       <input type="text" name="street" required />
 
@@ -45,11 +47,6 @@
       <label>Страна:</label>
       <input type="text" name="country" required />
 
-      <!-- Загрузка KYC -->
-      <label>KYC-документы (паспорт, декларация и пр.):</label>
-      <input type="file" name="kycDocs" accept=".pdf,.jpg,.jpeg,.png" multiple required />
-
-      <!-- Согласие -->
       <label>
         <input type="checkbox" required />
         Я подтверждаю, что предоставляю достоверную информацию и соглашаюсь с условиями оказания услуги, включая обработку персональных данных.
@@ -61,12 +58,12 @@
     <!-- Результат -->
     <div id="result" style="display:none;">
       <p>Договор сгенерирован:</p>
-      <a id="downloadLink" href="#" download="contract.pdf">Скачать договор (PDF)</a><br><br>
+      <a id="downloadLink" href="#" download="contract.docx">Скачать договор (Word)</a><br><br>
       <a id="whatsappLink" href="#" target="_blank">Перейти в WhatsApp</a>
     </div>
   </div>
 
-  <!-- EmailJS SDK + form.js -->
+  <!-- EmailJS SDK и скрипт -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <script src="form.js"></script>
 </body>
