@@ -8,16 +8,33 @@
 </head>
 <body>
   <div class="container">
+    <!-- Логотип -->
+    <div style="text-align:center; margin-bottom: 20px;">
+      <img src="https://immigrant.es/logo.png" alt="Логотип Immigrant Consulting" style="max-height: 60px;" />
+    </div>
+
     <h1>Заявка на обмен USDT → EUR</h1>
-    <form id="exchangeForm">
+    <form id="exchangeForm" enctype="multipart/form-data">
       <label>ФИО:</label><input type="text" name="name" required />
       <label>Паспорт / NIE:</label><input type="text" name="passport" required />
       <label>Email:</label><input type="email" name="email" required />
       <label>IBAN:</label><input type="text" name="iban" required />
       <label>Сумма (в USDT):</label><input type="number" name="amount" required />
-      <label><input type="checkbox" required /> Я согласен с условиями и AML/KYC</label>
+
+      <!-- Загрузка файлов KYC -->
+      <label>KYC-документы (паспорт, декларация и пр.):</label>
+      <input type="file" name="kycDocs" accept=".pdf,.jpg,.jpeg,.png" multiple required />
+
+      <!-- Согласие -->
+      <label>
+        <input type="checkbox" required />
+        Я подтверждаю, что предоставляю достоверную информацию и соглашаюсь с условиями оказания услуги, включая обработку персональных данных.
+      </label>
+
       <button type="submit">Отправить</button>
     </form>
+
+    <!-- Результат -->
     <div id="result" style="display:none;">
       <p>Договор сгенерирован:</p>
       <a id="downloadLink" href="#" download="contract.pdf">Скачать договор (PDF)</a><br><br>
