@@ -31,12 +31,10 @@ document.getElementById('exchangeForm').addEventListener('submit', async functio
     country
   };
 
-  // Инициализация EmailJS
   emailjs.init('E12iyom7-49KmyGud');
   const serviceID = 'service_2mxuxfg';
   const templateID = 'template_4wt295m';
 
-  // Отправка email
   emailjs.send(serviceID, templateID, templateParams)
     .then(() => console.log("Email отправлен"))
     .catch((error) => {
@@ -44,7 +42,6 @@ document.getElementById('exchangeForm').addEventListener('submit', async functio
       alert("Ошибка при отправке email. Попробуйте ещё раз.");
     });
 
-  // Генерация Word-договора на сервере
   try {
     const response = await fetch("https://usdt-docs.railway.app/generate", {
       method: "POST",
